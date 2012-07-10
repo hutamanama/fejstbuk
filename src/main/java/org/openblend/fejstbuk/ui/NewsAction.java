@@ -1,5 +1,7 @@
 package org.openblend.fejstbuk.ui;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Produces;
@@ -10,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import org.openblend.fejstbuk.domain.Post;
+import org.openblend.fejstbuk.domain.Status;
 import org.openblend.fejstbuk.domain.User;
 import org.openblend.fejstbuk.qualifiers.LoggedIn;
 
@@ -27,12 +30,14 @@ public class NewsAction {
     private User user;
 
 
+
     @Produces
     @Named
-    public List<Post> getNewsFeed() {
-        TypedQuery<Post> q = em.createQuery("select p from Post p where p.user.id = :userId", Post.class);
-        q.setParameter("userId", user.getId());
-        return q.getResultList();
+    public List<Status> getNewsFeed() {
+        List<Status> list=new ArrayList<Status>();
+        list.add(new Status("hejlo", new Date()));
+        list.add(new Status("kr nekaj", new Date()));
+        return list;
     }
 
 }
